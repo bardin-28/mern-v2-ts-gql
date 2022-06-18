@@ -1,0 +1,51 @@
+before_script:
+  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+  - mkdir -p ~/.ssh
+  - eval $(ssh-agent -s)
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+variables:
+  STAGE_IP: _
+  STAGE_HOST: postalspy.tallium.com
+  PROD_IP: _
+  PROD_HOST: _
+
+stages:
+  - deploy
+
+### Stage jobs ############################################################
+
+.deploy_stage:
+  stage: deploy
+  script:
+    - echo "Started deploy on stage."
+    - ssh-add <(echo "$STAGE_KEY")
+    - ssh -o StrictHostKeyChecking=no -t root@$STAGE_IP "set -ex;
+        cd ~/frontend; git checkout .; git checkout dev; git pull;
+        ./install.sh stage $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD
+      "
+  environment:
+    name: stage
+    url: https://$STAGE_HOST
+  only: [ dev ]
+
+build_local:
+  stage: deploy
+  script: ./build.sh local $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD --prune
+  only: [ dev ]
+
+### Production jobs #######################################################
+
+.deploy_prod:
+  stage: deploy
+  script:
+    - echo "Started deploy on prod."
+    - ssh-add <(echo "$PROD_KEY")
+    - ssh -o StrictHostKeyChecking=no -t root@$PROD_IP "set -ex;
+        cd ~/frontend; git checkout .; git checkout main; git pull;
+        ./install.sh prod $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD
+      "
+  environment:
+    name: production
+    url: https://$PROD_HOST
+  only: [ main ]

@@ -1,0 +1,14 @@
+/.git/
+/.idea/
+/.vscode/
+/build/
+/dist/
+/node_modules/
+
+/.dockerignore
+/.gitignore
+/.gitlab-ci.yml
+/Dockerfile*
+/*.sh
+/README.md
+/docker-compose*.yml

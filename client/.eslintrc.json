@@ -1,0 +1,137 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier",  "@typescript-eslint"],
+
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "quotes": ["error", "single"],
+    "react/prop-types": "off",
+    "no-new-object": "error",
+    "no-unused-vars": "error",
+    "object-shorthand": "error",
+    "no-prototype-builtins": "error",
+    "prefer-object-spread": "error",
+    "no-array-constructor": "error",
+    "prefer-destructuring": "error",
+    "prefer-template": "error",
+    "template-curly-spacing": "error",
+    "wrap-iife": ["error", "outside"],
+    "no-loop-func": "error",
+    "prefer-rest-params": "error",
+    "space-before-blocks": "error",
+    "prefer-spread": "error",
+    "function-paren-newline": ["error", "consistent"],
+    "prefer-arrow-callback": "error",
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "arrow-parens": ["error", "always"],
+    "arrow-body-style": ["error", "as-needed"], // maby need change
+    "no-confusing-arrow": "error",
+    "no-duplicate-imports": "error",
+    "object-curly-newline": ["error", { "consistent": true }],
+    "generator-star-spacing": ["error", { "before": false, "after": true }],
+    "dot-notation": "error",
+    "one-var": ["error", "never"],
+    "operator-linebreak": ["error", "before"],
+    "no-case-declarations": "error",
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "no-mixed-operators": "error",
+    "nonblock-statement-body-position": ["error", "beside"],
+    "brace-style": "error",
+    "no-else-return": "error",
+    "indent": ["error", 2, { "VariableDeclarator": 1, "SwitchCase": 1 }],
+    "space-infix-ops": "error",
+    "eol-last": "error",
+    "no-whitespace-before-property": "error",
+    "padded-blocks": ["error", "never"],
+    "no-multiple-empty-lines": "error",
+    "space-in-parens": ["error", "never"],
+    "array-bracket-spacing": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "max-len": ["warn", { "code": 160, "tabWidth": 2 }],
+    "key-spacing": ["error", { "beforeColon": false }],
+    "no-trailing-spaces": "error",
+    "comma-style": ["error", "last"],
+    "comma-dangle": ["error", "only-multiline"],
+    "semi": ["error", "always"],
+    "no-new-wrappers": "error",
+    "id-length": "warn",
+    "camelcase": [
+      "warn",
+      {
+        "properties": "never",
+        "ignoreDestructuring": true,
+        "ignoreGlobals": true,
+        "ignoreImports": true
+      }
+    ], // maby need  exgenge
+    "new-cap": ["error", { "capIsNew": false }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "parent", "sibling", "index"],
+        "warnOnUnassignedImports": true,
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "**/*.+(css|sass|less|scss|pcss|styl)",
+            "patternOptions": {
+              "dot": true,
+              "nocomment": true
+            },
+            "group": "unknown",
+            "position": "after"
+          },
+          {
+            "pattern": "{.,..}/**/*.+(css|sass|less|scss|pcss|styl)",
+            "patternOptions": {
+              "dot": true,
+              "nocomment": true
+            },
+            "group": "unknown",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}
