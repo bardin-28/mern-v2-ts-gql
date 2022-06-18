@@ -1,27 +1,39 @@
 version: '3.8'
 services:
   api:
-    container_name: api
+    container_name: node_api
     restart: always
     build: .
+    networks:
+      - app-network
     ports:
       - ${PORT}:${PORT}
+    environment:
+      MONGO_URI: mongodb://${DB_NAME}:${DB_PASS}@mongodb
     depends_on:
       - db
     volumes:
-      - .:/usr/src/app
+      - .:/var/www/html
 
   db:
-    container_name: postgres
-    image: postgres
-    network_mode: "host"
-    ports:
-      - '5433:${DB_PORT}'
-    volumes:
-      - data:/data/db
+    image: mongo:latest
+    restart: always
+    container_name: node-db
+    env_file: ./.env
     environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
+       MONGO_INITDB_ROOT_USERNAME: ${DB_NAME}
+       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    networks:
+      - app-network
+    volumes:
+      - db:/data/db
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  data: {}
+  db:
+    driver: local
