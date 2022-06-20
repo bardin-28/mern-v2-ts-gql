@@ -1,22 +1,24 @@
-# React app
+# Node.js app
 
 ### Technology stack:
 
-### `React`
+### `Express`
 ### `TypeScript`
 ### `GraphQL`
-### `ES-Lint`
-### `Style-lint`
+### `Docker + Docker Compose`
+### `Mongo DB`
 
 ## In the project directory, you can run:
 
-### `npm run dev`
+### `docker-compose up --build`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 The page will reload if you make edits.\
-You will also see any lint errors in the console.
+
+GraphQL Playground:\
+Open [http://localhost:5000/api](http://localhost:5000/api) to view it in the browser.
 
 ## Author
 

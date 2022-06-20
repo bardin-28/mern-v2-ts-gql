@@ -1,14 +1,8 @@
-const users: Array<any> = [{
-    id: 1,
-    first_name: 'Vladyslav',
-    last_name: 'Tsyvinda',
-    email: 'bardindeveloper@gmail.com'
-}];
+import User from '../../../db/models/User';
 
 const usersQueries = {
-    getAllUsers() {
-        return users;
-    }
+    getAllUsers: async () => await User.find(),
+    getUser: async (_: any, { email }: any) => await User.findOne({ email }),
 }
 
-export default usersQueries
+export default usersQueries;

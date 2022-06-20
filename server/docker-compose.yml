@@ -1,34 +1,36 @@
 version: '3.8'
 services:
-  api:
-    container_name: node_api
-    restart: always
-    build: .
-    networks:
-      - app-network
-    ports:
-      - ${PORT}:${PORT}
-    environment:
-      MONGO_URI: mongodb://${DB_NAME}:${DB_PASS}@mongodb
-    depends_on:
-      - db
-    volumes:
-      - .:/var/www/html
-
-  db:
+  mongo_db:
     image: mongo:latest
     restart: always
-    container_name: node-db
+    container_name: db_container
     env_file: ./.env
     environment:
-       MONGO_INITDB_ROOT_USERNAME: ${DB_NAME}
-       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+      MONGO_INITDB_DATABASE: ${DB_NAME}
     ports:
       - ${DB_PORT}:${DB_PORT}
     networks:
       - app-network
     volumes:
       - db:/data/db
+
+
+  api:
+    container_name: node-api
+    restart: always
+    env_file: ./.env
+    build: .
+    networks:
+      - app-network
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      MONGO_URI: mongodb://mongo_db:${DB_PORT}
+    links:
+      - mongo_db
+    volumes:
+      - .:/var/www/html
+
 
 networks:
   app-network:

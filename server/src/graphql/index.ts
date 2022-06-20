@@ -5,6 +5,8 @@ import {
     ApolloServerPluginLandingPageGraphQLPlayground
 } from "apollo-server-core";
 
+const PORT = process.env.PORT;
+
 async function startApolloServer(app: any) {
     const server = new ApolloServer({
         introspection: true,
@@ -25,8 +27,9 @@ async function startApolloServer(app: any) {
     await server.start();
 
     server.applyMiddleware({ app, path: "/api" });
-    await new Promise<void>(resolve => app.listen({ port: 5000 }, resolve));
-    console.log(`🚀 Server ready at http://localhost:5000${server.graphqlPath}`);
+    await new Promise<void>(resolve => app.listen({ port: PORT }, resolve));
+
+    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
 }
 
 export default startApolloServer;
