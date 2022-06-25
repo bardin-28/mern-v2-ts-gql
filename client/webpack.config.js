@@ -29,15 +29,15 @@ const webpackPlugins = [
   // } ),
 ];
 
-if ('production' === process.env.NODE_ENV) {
-  webpackPlugins.push(
-    new InjectManifest({
-      swSrc: './src/serviceWorker.js',
-      swDest: 'service-worker.js',
-      maximumFileSizeToCacheInBytes: 7000000,
-    })
-  );
-}
+// if ('production' === process.env.NODE_ENV) {
+//   webpackPlugins.push(
+//     new InjectManifest({
+//       swSrc: './src/serviceWorker.js',
+//       swDest: 'service-worker.js',
+//       maximumFileSizeToCacheInBytes: 7000000,
+//     })
+//   );
+// }
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -108,7 +108,7 @@ module.exports = {
     // },
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './build'),
     filename: 'app.js',
     publicPath: '/',
   },

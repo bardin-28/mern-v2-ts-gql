@@ -15,10 +15,10 @@ RUN npm ci
 COPY . ./
 
 ARG ENV=local
-RUN if [[ ! -f ".env.$ENV" && -f ".env.$ENV.example" ]]; then cp ".env.$ENV.example" ".env.$ENV"; fi
-RUN cp ".env.$ENV" .env
+#RUN if [[ ! -f ".env.$ENV" && -f ".env.$ENV.example" ]]; then cp ".env.$ENV.example" ".env.$ENV"; fi
+#RUN cp ".env.$ENV" .env
 
-ARG BUILD_SCRIPT=build
+ARG BUILD_SCRIPT=build:prod
 RUN npm run ${BUILD_SCRIPT}
 
 ### production environment
