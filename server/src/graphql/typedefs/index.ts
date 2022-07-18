@@ -10,12 +10,10 @@ const indexType = gql`
     # Mutations
     type Mutation {
         createUser(email: String!, password: String!, first_name: String!, last_name: String!): User!
+        loginUser(email: String!, password: String!): User!
         updateUser(email: String, password: String, first_name: String, last_name: String): User!
         deleteUser(email: String! ): User!
     }
 `
 
 export default indexType;
-
-
-

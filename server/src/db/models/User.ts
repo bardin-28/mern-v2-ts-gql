@@ -5,6 +5,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     first_name: { type: String },
     last_name: { type: String },
+    token: { type: String },
     links: [{type: Types.ObjectId, ref: 'Link' }]
 })
 
