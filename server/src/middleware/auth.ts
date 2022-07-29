@@ -14,6 +14,7 @@ module.exports = (req: any, res: any, next: any ) => {
 
         if (token) {
             try {
+                // @ts-ignore
                 const user = jwt.verify(token, process.env.JWT_SECRET);
                 return user;
             } catch (err) {

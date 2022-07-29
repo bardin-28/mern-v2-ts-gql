@@ -31,6 +31,7 @@ const usersMutations = {
                 user_id: newUser._id,
                 email
             },
+            // @ts-ignore
             process.env.JWT_SECRET,
             {
                 expiresIn: '24h'
@@ -55,6 +56,7 @@ const usersMutations = {
                     user_id: user._id,
                     email
                 },
+                // @ts-ignore
                 process.env.JWT_SECRET,
                 {
                     expiresIn: '24h'
