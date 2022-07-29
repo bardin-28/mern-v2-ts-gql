@@ -54,6 +54,11 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
@@ -108,7 +113,7 @@ module.exports = {
     // },
   },
   output: {
-    path: path.resolve(__dirname, './build'),
+    path: path.resolve(__dirname, './dist'),
     filename: 'app.js',
     publicPath: '/',
   },
@@ -116,7 +121,7 @@ module.exports = {
 
   devServer: {
     host: '0.0.0.0',
-    port: 8080,
+    port: 3000,
     // contentBase: path.resolve(__dirname, './dist/'),
     // publicPath: '/',
     // watchContentBase: true,
