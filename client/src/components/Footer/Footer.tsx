@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export const Footer = () => {
-    return (
-        <div>
+const Footer = memo(() => <div></div>);
 
-        </div>
-    );
-};
+Footer.displayName = 'Footer';
+export default Footer;

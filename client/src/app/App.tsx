@@ -2,7 +2,9 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-import getAllUsersQuery from '../api/queries/getAllUsers.graphql';
+import AppRoutes from '../routes/AppRoutes';
+
+import getAllUsersQuery from 'api/queries/getAllUsers.graphql';
 
 function App() {
   function DisplayAllUsers(): any {
@@ -29,6 +31,7 @@ function App() {
     <div>
       <h1>Learn TS + GraphQL</h1>
       <DisplayAllUsers />
+      <AppRoutes />
     </div>
   );
 }

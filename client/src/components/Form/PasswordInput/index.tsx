@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 //images
-import EyeBlue from 'assets/images/icons/password-eye-blue.svg';
 import Eye from 'assets/images/icons/password-eye.svg';
 
 interface PasswordInput {
@@ -60,12 +59,6 @@ const PasswordInput: React.FC<PasswordInput> = ({
             alt="show-pass"
             className={passwordShown ? 'hide-icon' : ''}
             src={Eye}
-            onClick={togglePasswordVisibility}
-          />
-          <img
-            alt="hide-pass"
-            className={passwordShown ? '' : 'hide-icon'}
-            src={EyeBlue}
             onClick={togglePasswordVisibility}
           />
         </div>

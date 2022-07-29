@@ -47,10 +47,12 @@
     /* Module Resolution Options */
      "moduleResolution": "node",                  /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "paths": {
+      "api/*": ["api/*"],
       "app/*": ["app/*"],
       "assets/*": ["assets/*"],
       "forms/*": ["forms/*"],
       "components/*": ["components/*"],
+      "constants/*": ["constants/*"],
       "pages/*": ["pages/*"],
       "interfaces/*": ["interfaces/*"],
       "hooks/*": ["hooks/*"],
