@@ -1,9 +1,13 @@
 import React, { memo } from 'react';
 
+import SignInForm from 'forms/SignIn/SignIn';
+
+import styles from './SignIn.module.scss';
+
 const SignIn = memo(() => (
-  <div>
-    <h1>Sign in page</h1>
-    <h1>asd</h1>
+  <div className={styles.wrapper}>
+    <h1 className={styles.title}>Welcome back</h1>
+    <SignInForm />
   </div>
 ));
 

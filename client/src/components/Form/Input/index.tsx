@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { useFormikContext } from 'formik';
+
 interface TextInput {
   name: string;
   id: string;
@@ -23,25 +25,28 @@ const TextInput: React.FC<TextInput> = memo(
     onBlur,
     readOnly,
     value,
-  }) => (
-    <input
-      type={'text'}
-      className={`field ${className ? className : ''}`}
-      placeholder={placeholder}
-      id={id}
-      name={name}
-      value={value}
-      disabled={disabled}
-      readOnly={readOnly}
-      onChange={onChange}
-      onBlur={onBlur}
-      autoComplete={'off'}
-      autoCorrect={'off'}
-      spellCheck={'false'}
-      autoCapitalize={'none'}
-      dir={'ltr'}
-    />
-  )
+  }) => {
+    const { setFieldValue } = useFormikContext();
+    return (
+      <input
+        type={'text'}
+        className={`field ${className ? className : ''}`}
+        placeholder={placeholder}
+        id={id}
+        name={name}
+        value={value}
+        disabled={disabled}
+        readOnly={readOnly}
+        onChange={(event) => setFieldValue(name, event.target.value)}
+        onBlur={onBlur}
+        autoComplete={'off'}
+        autoCorrect={'off'}
+        spellCheck={'false'}
+        autoCapitalize={'none'}
+        dir={'ltr'}
+      />
+    );
+  }
 );
 
 TextInput.displayName = 'TextInput';

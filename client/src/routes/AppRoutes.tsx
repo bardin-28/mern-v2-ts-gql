@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -11,7 +11,9 @@ import Private from './Private/Private';
 
 import Preloader from 'components/Preloader';
 import { ROUTES, ROLE } from 'constants/constants';
-import SignIn from 'pages/Auth/SignIn';
+
+const SignIn = lazy(() => import('pages/Auth/SignIn'));
+const SignUp = lazy(() => import('pages/Auth/SignUp'));
 
 const AppRoutes = () => {
   const authenticated = false;
@@ -42,6 +44,7 @@ const AppRoutes = () => {
         <Suspense fallback={<Preloader />}>
           <Routes>
             <Route path={ROUTES.AUTH.SIGN_IN} element={<SignIn />} />
+            <Route path={ROUTES.AUTH.SIGN_UP} element={<SignUp />} />
             <Route
               path={'*'}
               element={<Navigate to={ROUTES.AUTH.SIGN_IN} replace />}

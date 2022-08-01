@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import AppRoutes from '../routes/AppRoutes';
 
-import getAllUsersQuery from 'api/queries/getAllUsers.graphql';
+import getAllUsersQuery from 'graphql/queries/getAllUsers.graphql';
 
 function App() {
   function DisplayAllUsers(): any {
@@ -28,11 +28,11 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Learn TS + GraphQL</h1>
-      <DisplayAllUsers />
+    <>
+      {/*<h1>Learn TS + GraphQL</h1>*/}
+      {/*<DisplayAllUsers />*/}
       <AppRoutes />
-    </div>
+    </>
   );
 }
 

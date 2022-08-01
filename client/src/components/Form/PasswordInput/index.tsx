@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
+import cn from 'classnames';
+
 //images
-import Eye from 'assets/images/icons/password-eye.svg';
+import EyeIco from 'assets/images/icons/password-eye.svg';
 
 interface PasswordInput {
   name: string;
@@ -16,6 +18,8 @@ interface PasswordInput {
   icon?: boolean;
 }
 
+import styles from './PasswordInput.module.scss';
+
 const PasswordInput: React.FC<PasswordInput> = ({
   name,
   id,
@@ -27,7 +31,7 @@ const PasswordInput: React.FC<PasswordInput> = ({
   value,
   readOnly,
   icon = true,
-}) => {
+}): any => {
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -35,7 +39,7 @@ const PasswordInput: React.FC<PasswordInput> = ({
   };
 
   return (
-    <div className="input-password-wrapper">
+    <div className={cn(styles.wrapper, { [styles.icon]: icon })}>
       <input
         dir={'ltr'}
         id={id}
@@ -54,13 +58,12 @@ const PasswordInput: React.FC<PasswordInput> = ({
         autoCapitalize={'none'}
       />
       {icon && (
-        <div className="icon-wrapper">
-          <img
-            alt="show-pass"
-            className={passwordShown ? 'hide-icon' : ''}
-            src={Eye}
-            onClick={togglePasswordVisibility}
-          />
+        <div
+          className={cn(styles['icon-wrapper'], {
+            [styles['icon-show']]: passwordShown,
+          })}
+          onClick={togglePasswordVisibility}>
+          <img src={EyeIco} alt="asd" />
         </div>
       )}
     </div>

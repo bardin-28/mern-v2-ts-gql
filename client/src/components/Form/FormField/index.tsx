@@ -16,6 +16,7 @@ import TagsField from "components/Form/TagsField";
 interface FormField {
   name: string;
   type: string;
+  label?: string
   id?: string;
   placeholder?: string;
   customWrapper?: string;
