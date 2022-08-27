@@ -1,10 +1,15 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 
+import { useMutation } from '@apollo/client';
 import { Form, Formik } from 'formik';
-import * as yup from 'yup';
 
+import SIGN_IN_USER from './queries/signInUser.graphql';
+
+import { useGlobalState } from 'app/store';
+import { STORE_ACTIONS } from 'app/store/constants';
 import CustomButton from 'components/CustomButton';
 import FormField from 'components/Form/FormField';
+import { signInValidation } from 'validations/validations';
 
 import styles from './SignIn.module.scss';
 
@@ -13,42 +18,50 @@ const initialValues = {
   password: '',
 };
 
-const validate = () =>
-  yup.object().shape({
-    email: yup
-      .string()
-      .email('Invalid email')
-      .required('Required')
-      // eslint-disable-next-line
-      .test('no-russian', 'Russian\'s are not welcome here', (value: any) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        return !value?.includes('.ru');
-      }),
-    password: yup.string().required('Required'),
-  });
+const SignInForm = memo(() => {
+  const [signIn, { error, data: loginData }] = useMutation(SIGN_IN_USER);
+  const [state, dispatch] = useGlobalState();
 
-const SignInForm = memo(() => (
-  <div className={styles.wrapper}>
-    <h2 className={styles.title}>Sign in</h2>
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validate}
-      onSubmit={(values) => console.log(values)}>
-      {() => (
-        <Form>
-          <FormField type={'text'} name={'email'} placeholder={'Email'} />
-          <FormField
-            type={'password'}
-            name={'password'}
-            placeholder={'Password'}
-          />
-          <CustomButton text={'Submit'} type={'submit'} />
-        </Form>
-      )}
-    </Formik>
-  </div>
-));
+  useEffect(() => {
+    if (loginData) {
+      successLoginHandler(loginData?.loginUser);
+    }
+    if (error) {
+      console.log('error:', error);
+    }
+  }, [loginData, error]);
+
+  const successLoginHandler = (data) => {
+    dispatch({ type: STORE_ACTIONS.USER_LOGIN });
+    localStorage.setItem('token', data.token);
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      <h2 className={styles.title}>Sign in</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={signInValidation}
+        onSubmit={({ email, password }) =>
+          signIn({
+            variables: { email, password },
+          })
+        }>
+        {() => (
+          <Form>
+            <FormField type={'text'} name={'email'} placeholder={'Email'} />
+            <FormField
+              type={'password'}
+              name={'password'}
+              placeholder={'Password'}
+            />
+            <CustomButton text={'Submit'} type={'submit'} />
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+});
 
 SignInForm.displayName = 'SignInForm';
 export default SignInForm;

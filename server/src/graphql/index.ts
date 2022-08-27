@@ -1,5 +1,7 @@
 const { ApolloServer } = require('apollo-server-express');
 import schema from "./schema";
+// @ts-ignore
+import jwt from 'jsonwebtoken';
 
 import {
     ApolloServerPluginLandingPageGraphQLPlayground
@@ -22,14 +24,15 @@ async function startApolloServer(app: any) {
                 return new Error('Internal server error');
             }
 
-            // Otherwise return the original error. The error can also
-            // be manipulated in other ways, as long as it's returned.
             return err;
         },
-        context: ({ req, res }: any) => {
+        context: ({ req }: any) => {
+          let token = req.headers.authorization || '';
+
+          let user = jwt.decode(token)
+
             return {
-                req,
-                res,
+              user
             }
         },
         ...schema

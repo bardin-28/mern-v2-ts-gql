@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -9,24 +9,34 @@ import {
 
 import Private from './Private/Private';
 
+import { useGlobalState } from 'app/store';
 import Preloader from 'components/Preloader';
 import { ROUTES, ROLE } from 'constants/constants';
 
 const SignIn = lazy(() => import('pages/Auth/SignIn'));
 const SignUp = lazy(() => import('pages/Auth/SignUp'));
 
-const AppRoutes = () => {
-  const authenticated = false;
+const Header = lazy(() => import('components/Header'));
 
-  if (authenticated) {
+const Dashboard = lazy(() => import('pages/Dashboard'));
+const CreateLink = lazy(() => import('pages/CreateLink'));
+const DetailedLink = lazy(() => import('pages/DetailedLink'));
+
+const AppRoutes = () => {
+  const [state, dispatch] = useGlobalState();
+  const auth = state.user.loggedIn;
+
+  if (auth) {
     return (
       <Router>
-        {/*<Header />*/}
+        <Header />
         <main>
           <Suspense fallback={<Preloader />}>
             <Routes>
               <Route element={<Private route allowedRoles={[ROLE.ADMIN]} />}>
-                <Route path={ROUTES.DASHBOARD} element={<>dashboard</>} />
+                <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+                <Route path={ROUTES.CREATE} element={<CreateLink />} />
+                <Route path={ROUTES.DETAIL} element={<DetailedLink />} />
               </Route>
               <Route path={'*'} element={<Navigate to={ROUTES.DASHBOARD} />} />
             </Routes>

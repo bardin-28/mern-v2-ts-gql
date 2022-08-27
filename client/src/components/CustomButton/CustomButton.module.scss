@@ -17,4 +17,9 @@
   &:hover {
     background: var(--color-blue-light400);
   }
+
+  svg,
+  img {
+    margin-left: 10px;
+  }
 }

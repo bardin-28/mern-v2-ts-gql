@@ -4,6 +4,8 @@ import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
 import { ROUTES } from '../../constants/constants';
 
+import { useGlobalState } from 'app/store';
+
 interface PrivateProps {
   allowedRoles: Array<string>;
   route?: boolean;
@@ -14,8 +16,9 @@ const Private = ({
   route = false,
 }: PrivateProps): React.ReactElement => {
   const location = useLocation();
-  // const userState = useSelector((state) => state?.user);
-  const authenticated = true; // userState?.authenticated;
+  const [state] = useGlobalState();
+
+  const authenticated = state.user.loggedIn;
   const userRole = 'admin'; // userState?.data?.role
 
   const checkRoute = () => {

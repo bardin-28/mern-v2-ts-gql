@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './app/App';
 
+import { StoreProvider } from 'app/store';
 import { apiClient } from 'graphql/main';
 
 import 'styles/index.scss';
@@ -14,9 +15,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <ApolloProvider client={apiClient}>
+  <ApolloProvider client={apiClient}>
+    <StoreProvider>
       <App />
-    </ApolloProvider>
-  </React.StrictMode>
+    </StoreProvider>
+  </ApolloProvider>
 );

@@ -6,6 +6,10 @@ export const ROUTES = {
 
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
+
+  CREATE: '/create',
+  DETAIL: '/detail/:link-id',
+  // CREATE: '/create',
 };
 
 export const ROLE = {

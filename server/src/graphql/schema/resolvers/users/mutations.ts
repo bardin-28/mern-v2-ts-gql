@@ -1,4 +1,4 @@
-import User from '../../../db/models/User';
+import User from '../../../../db/models/User';
 import { ApolloError } from 'apollo-server-errors';
 // @ts-ignore
 import bcrypt from 'bcryptjs';

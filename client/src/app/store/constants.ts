@@ -1,0 +1,4 @@
+export const STORE_ACTIONS = {
+  USER_LOGIN: 'USER_LOGIN',
+  USER_LOGOUT: 'USER_LOGOUT',
+};

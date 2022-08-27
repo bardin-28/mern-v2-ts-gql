@@ -9,4 +9,4 @@ const linkSchema = new Schema({
     owner: { type: Types.ObjectId, ref: 'User'}
 })
 
-module.exports = model('Link', linkSchema)
+export default model('Link', linkSchema)
