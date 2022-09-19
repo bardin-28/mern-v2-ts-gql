@@ -1,7 +1,6 @@
-mutation CREATE_LINK($from: String!, $to: String!) {
-  createLink(from: $from, to: $to) {
+mutation CREATE_LINK($original: String!) {
+  createLink(original: $original) {
     code
-    from
-    to
+    original
   }
 }

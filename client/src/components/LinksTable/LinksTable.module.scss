@@ -6,3 +6,20 @@
   border-radius: 6px;
   padding: 15px 20px;
 }
+
+.clear {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 30px;
+
+  font-size: 22px;
+
+  color: var(--color-black);
+
+  button {
+    margin-top: 10px;
+    display: inline-block;
+  }
+}

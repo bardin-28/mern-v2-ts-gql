@@ -45,13 +45,8 @@ export const signUpValidation = () =>
 
 export const createLinkValidation = () =>
   yup.object().shape({
-    from: yup
+    original: yup
       .string()
       .required('Required')
       .matches(httpRegex, 'Should contain: http:// or https://'),
-    to: yup
-      .string()
-      .required('Required')
-      .matches(httpRegex, 'Should contain: http:// or https://'),
-    // .notOneOf([yup.ref('from')], "Fields can't be equal"),
   });

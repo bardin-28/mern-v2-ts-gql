@@ -6,13 +6,14 @@ const linkTypeDefs = gql`
   }
 
   extend type Mutation {
-    createLink(from: String! to: String!): Link!
+    createLink(original: String!): Link!
+    deleteLink(id: String!): Link!
   }
 
   type Link {
     id: ID!
-    from: String!
-    to: String!
+    original: String!
+    short: String!
     code: String!
     date: String!
     clicks: Int!
@@ -20,8 +21,7 @@ const linkTypeDefs = gql`
   }
 
   input CreateLink {
-    from: String!
-    to: String!
+    original: String!
   }
 `
 

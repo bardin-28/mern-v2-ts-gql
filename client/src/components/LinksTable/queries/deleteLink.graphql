@@ -1,0 +1,8 @@
+mutation DELETE_LINK($id: String!) {
+  deleteLink(id: $id) {
+    code
+    owner {
+      email
+    }
+  }
+}
