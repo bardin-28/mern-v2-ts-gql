@@ -22,7 +22,7 @@
 
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "quotes": ["error", "single"],
+    "quotes": ["warn", "single"],
     "react/prop-types": "off",
     "no-new-object": "error",
     "no-unused-vars": "error",
@@ -47,7 +47,7 @@
     "no-duplicate-imports": "error",
     "object-curly-newline": ["error", { "consistent": true }],
     "generator-star-spacing": ["error", { "before": false, "after": true }],
-    "dot-notation": "error",
+    "dot-notation": ["off"],
     "one-var": ["error", "never"],
     "operator-linebreak": ["error", "before"],
     "no-case-declarations": "error",

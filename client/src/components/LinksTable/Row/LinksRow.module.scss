@@ -1,0 +1,30 @@
+.item {
+  padding: 5px;
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.heading {
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.link a {
+  display: inline-block;
+  // stylelint-disable-next-line
+  text-overflow: ellipsis;
+
+  /* Needed to make it work */
+  overflow: hidden;
+  white-space: nowrap;
+
+  max-width: 200px;
+}
+
+.actions {
+  max-width: 100px;
+}

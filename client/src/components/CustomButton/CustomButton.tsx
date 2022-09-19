@@ -1,6 +1,7 @@
 import React, { memo, MouseEventHandler } from 'react';
 
 interface CustomButtonProps {
+  appearence?: string;
   text: string;
   type: 'submit' | 'button' | 'reset';
   className?: string;
@@ -13,10 +14,17 @@ import cn from 'classnames';
 import styles from './CustomButton.module.scss';
 
 const CustomButton = memo(
-  ({ text, type, onClick, className, icon }: CustomButtonProps) => (
+  ({
+    appearence = '',
+    text,
+    type,
+    onClick,
+    className,
+    icon,
+  }: CustomButtonProps) => (
     <button
       type={type}
-      className={cn(styles.wrapper, className)}
+      className={cn(styles.wrapper, styles[appearence], className)}
       onClick={onClick}>
       {text}
       {icon}

@@ -1,0 +1,11 @@
+query GET_USER_LINKS {
+  getCurrentUser {
+    links {
+      id
+      from
+      to
+      code
+      clicks
+    }
+  }
+}

@@ -11,7 +11,7 @@ const usersMutations = {
         const oldUser = await  User.findOne({ email })
 
         if (oldUser) {
-            throw new ApolloError('A user is already exist', 'USER_ALREADY_EXIST')
+            throw new ApolloError('User already exist', 'USER_ALREADY_EXIST')
         }
 
         // Encrypt password
@@ -69,7 +69,9 @@ const usersMutations = {
             return user;
         } else {
             // If user doesn't exist, return error
-            throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD')
+            throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD', {
+              errors: { password: 'Incorrect password' }
+            })
         }
     },
     updateUser: async (_: any, { email, password, first_name, last_name }: any) => {

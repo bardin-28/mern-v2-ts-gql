@@ -19,7 +19,7 @@ const resolvers = {
       }
     },
     Link: {
-      user: async (parent: any) => {
+      owner: async (parent: any) => {
         const user = await User.find({_id: parent.owner})
 
         return user[0]

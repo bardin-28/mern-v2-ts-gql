@@ -9,8 +9,10 @@
   font-size: 16px;
   font-weight: 400;
   text-align: center;
+  color: var(--color-black);
 
   span {
+    color: var(--color-black);
     margin-left: 10px;
   }
 }
@@ -38,9 +40,9 @@
 
   .email {
     text-align: center;
-
     margin-top: 10px;
     margin-bottom: 15px;
+    color: var(--color-black);
   }
 
   .button {
@@ -52,7 +54,7 @@
   display: flex;
   justify-content: center;
 
-   span {
+  span {
     display: inline-flex;
     border-radius: 50%;
     padding: 15px;

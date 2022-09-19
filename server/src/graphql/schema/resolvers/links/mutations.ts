@@ -12,9 +12,10 @@ const linksMutations = {
     if (userEmail === '') {
       throw new ApolloError('No such user', 'NO_SUCH_USER')
     }
-
+    console.log(userEmail)
     const owner = await User.findOne({ userEmail })
 
+    console.log(owner)
     if (owner === null || owner.links === undefined) {
       throw new ApolloError('No such user', 'NO_SUCH_USER')
     }
@@ -24,8 +25,6 @@ const linksMutations = {
     const link = new Link({
       code, to, from, owner: owner?._id, clicks: 0
     })
-
-    console.log(link, 'link')
 
     const createdLink = await link.save()
 

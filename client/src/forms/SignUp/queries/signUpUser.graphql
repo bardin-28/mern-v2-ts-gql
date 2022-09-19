@@ -1,0 +1,5 @@
+mutation SIGN_UP_USER($email: String!, $password: String!, $first_name: String!, $last_name: String!) {
+  createUser(email: $email password: $password first_name: $first_name last_name: $last_name) {
+    email, token
+  }
+}

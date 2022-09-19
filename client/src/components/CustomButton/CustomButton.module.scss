@@ -22,4 +22,15 @@
   img {
     margin-left: 10px;
   }
+
+  &.ghost {
+    background: transparent;
+    border-color: var(--color-blue-light);
+    color: var(--color-blue-light);
+
+    &:hover {
+      border-color: var(--color-blue-light400);
+      color: var(--color-blue-light400);
+    }
+  }
 }

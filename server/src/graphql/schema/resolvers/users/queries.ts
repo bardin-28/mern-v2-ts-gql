@@ -27,6 +27,8 @@ const usersQueries = {
         throw new ApolloError('No such user', 'USER_NOT_FOUND')
       }
 
+      console.log(user, 'user')
+
       return user
     }
 }

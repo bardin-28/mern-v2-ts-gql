@@ -13,16 +13,19 @@ const initialState: any = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case STORE_ACTIONS.USER_LOGIN:
+    case STORE_ACTIONS.USER_LOGIN: {
       return {
         ...state,
         user: { ...state.user, loggedIn: true },
       };
-    case STORE_ACTIONS.USER_LOGOUT:
+    }
+
+    case STORE_ACTIONS.USER_LOGOUT: {
       return {
         ...state,
         user: { ...state.user, loggedIn: false },
       };
+    }
 
     default:
       return state;

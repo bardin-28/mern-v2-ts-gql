@@ -16,7 +16,7 @@ const linkTypeDefs = gql`
     code: String!
     date: String!
     clicks: Int!
-    user: User!
+    owner: User!
   }
 
   input CreateLink {

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { useQuery } from '@apollo/client';
+import { ApolloLink, useQuery } from '@apollo/client';
 import cn from 'classnames';
 
 import GET_CURRENT_USER from '../Header/queries/getCurrentUser.graphql';
@@ -8,16 +8,15 @@ import GET_CURRENT_USER from '../Header/queries/getCurrentUser.graphql';
 import { useGlobalState } from 'app/store';
 import { STORE_ACTIONS } from 'app/store/constants';
 import { ChevronIco } from 'assets/images/svg/chevron';
-import LogoutIco from 'assets/images/svg/logout';
 import { UserIco } from 'assets/images/svg/user';
 import CustomButton from 'components/CustomButton';
-import Picture from 'components/Picture';
 import useOutsideClick from 'hooks/useOutsideClick';
 
 import styles from './UserPopUp.module.scss';
 
 const UserPopUp = () => {
   const { loading, error, data: userData } = useQuery(GET_CURRENT_USER);
+
   const [active, setActive] = useState(false);
   const [store, dispatch] = useGlobalState();
   const popUpRef: any = useRef();
@@ -38,7 +37,8 @@ const UserPopUp = () => {
       <div
         className={cn(styles.trigger, { [styles.active]: active })}
         onClick={() => setActive(!active)}>
-        {userData?.getCurrentUser?.email}
+        {userData?.getCurrentUser?.first_name}{' '}
+        {userData?.getCurrentUser?.last_name}
         <span>
           <ChevronIco />
         </span>
