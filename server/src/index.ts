@@ -12,3 +12,5 @@ app.get('/', (req: any, res: any) => {
     res.send(`Hello to my GraphQL api! :)`)
 })
 
+app.use('/t', require('./service/redirrect'));
+

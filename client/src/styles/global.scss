@@ -1,6 +1,49 @@
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgb(0 0 0 / 0);
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+
+    &-corner {
+      background: transparent;
+    }
+
+    &-button {
+      width: 2px;
+      height: 2px;
+    }
+
+    &-track {
+      border: 0 none var(--color-main-orange);
+      border-radius: 4px;
+
+
+      &:hover {
+        background: var(--color-main-orange);
+        opacity: 0.1;
+      }
+
+      &:active {
+        background: var(--color-white);
+      }
+    }
+
+    &-thumb {
+      border: 0 none var(--color-main-orange);
+      border-radius: 4px;
+      background: var(--color-main-orange);
+
+      &:hover {
+        background: var(--color-main-orange);
+      }
+
+      &:active {
+        background: var(--color-main-orange);
+      }
+    }
+  }
 }
 
 html,

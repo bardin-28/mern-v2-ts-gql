@@ -48,6 +48,7 @@
     "object-curly-newline": ["error", { "consistent": true }],
     "generator-star-spacing": ["error", { "before": false, "after": true }],
     "dot-notation": ["off"],
+    "@typescript-eslint/ban-ts-comment": ["off"],
     "one-var": ["error", "never"],
     "operator-linebreak": ["error", "before"],
     "no-case-declarations": "error",

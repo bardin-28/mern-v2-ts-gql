@@ -12,12 +12,12 @@ interface TextInput {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   readOnly?: boolean;
   value?: any;
+  autoFocus?: any;
 }
 
 const TextInput: React.FC<TextInput> = memo(
   ({
     name,
-    onChange,
     id,
     className,
     disabled,
@@ -25,10 +25,12 @@ const TextInput: React.FC<TextInput> = memo(
     onBlur,
     readOnly,
     value,
+    autoFocus,
   }) => {
     const { setFieldValue } = useFormikContext();
     return (
       <input
+        autoFocus={autoFocus}
         type={'text'}
         className={`field ${className ? className : ''}`}
         placeholder={placeholder}

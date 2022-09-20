@@ -1,0 +1,12 @@
+query GET_LINK($id: String!) {
+  getLink(id: $id) {
+    code
+    original
+    clicks
+    short
+    date
+    owner {
+      email
+    }
+  }
+}

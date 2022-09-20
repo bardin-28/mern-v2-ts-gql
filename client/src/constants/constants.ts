@@ -4,11 +4,12 @@ export const ROUTES = {
     SIGN_UP: '/sign-up', // Register
   },
 
-  DASHBOARD: '/dashboard',
+  DASHBOARD: '/links',
   PROFILE: '/profile',
 
-  CREATE: '/create',
-  DETAIL: '/detail/:link-id',
+  CREATE: '/create-link',
+  DETAIL: '/links/:linkId',
+
   // CREATE: '/create',
 };
 

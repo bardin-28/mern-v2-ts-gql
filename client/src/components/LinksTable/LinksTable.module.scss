@@ -1,21 +1,29 @@
+.scroll-wrapper {
+  padding: 15px 20px;
+  background: var(--color-white);
+  border-radius: 6px;
+
+  max-height: 87vh;
+
+  overflow: hidden;
+}
+
 .wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: var(--color-white);
-  border-radius: 6px;
-  padding: 15px 20px;
+
+  max-height: 87vh;
+
+  overflow-y: scroll;
 }
 
 .clear {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   padding: 30px;
-
   font-size: 22px;
-
   color: var(--color-black);
 
   button {

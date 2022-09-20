@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-import { ApolloLink, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import cn from 'classnames';
 
 import GET_CURRENT_USER from '../Header/queries/getCurrentUser.graphql';

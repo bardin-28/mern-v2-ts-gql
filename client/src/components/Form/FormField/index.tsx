@@ -20,6 +20,8 @@ interface FormField {
   id?: string;
   placeholder?: string;
   customWrapper?: string;
+  autoFocus?: any;
+  disabled?: any;
 }
 
 const FormField: React.FC<FormField> = ( props: any ) => {

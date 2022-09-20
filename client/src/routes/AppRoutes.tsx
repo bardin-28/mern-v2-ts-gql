@@ -38,6 +38,7 @@ const AppRoutes = () => {
                 <Route path={ROUTES.CREATE} element={<CreateLink />} />
                 <Route path={ROUTES.DETAIL} element={<DetailedLink />} />
               </Route>
+
               <Route path={'*'} element={<Navigate to={ROUTES.DASHBOARD} />} />
             </Routes>
           </Suspense>
@@ -55,6 +56,7 @@ const AppRoutes = () => {
           <Routes>
             <Route path={ROUTES.AUTH.SIGN_IN} element={<SignIn />} />
             <Route path={ROUTES.AUTH.SIGN_UP} element={<SignUp />} />
+
             <Route
               path={'*'}
               element={<Navigate to={ROUTES.AUTH.SIGN_IN} replace />}

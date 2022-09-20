@@ -9,14 +9,12 @@ import LinksTable from 'components/LinksTable';
 import styles from './Dashboard.module.scss';
 
 const Dashboard: FC = () => {
-  const { loading, error, data: userLinks } = useQuery(GET_USER_LINKS);
+  const { loading, error, refetch, data: userLinks } = useQuery(GET_USER_LINKS);
   const links = userLinks?.getCurrentUser?.links;
-
-  console.log(links);
 
   return (
     <div className={styles.wrapper}>
-      <LinksTable links={links} />
+      <LinksTable links={links} update={refetch} />
     </div>
   );
 };

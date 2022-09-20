@@ -48,21 +48,23 @@ const linksMutations = {
     if (deletedLink === null) {
       throw new ApolloError('No such link', 'NO_SUCH_LINK')
     }
-    console.log(id, deletedLink, 'iddd2')
-
-    // owner?.links.push(createdLink)
-
-
-    // const index = array.indexOf(5);
-    // if (index > -1) { // only splice array when item is found
-    //   array.splice(index, 1); // 2nd parameter means remove one item only
-    // }
-
-    // await owner.save()
 
     return deletedLink
   },
+  updateLink: async (_: any, { id, original }: any, context:any) => {
+    let userEmail = context.user.email || '';
 
+    const owner = await User.findOne({ userEmail })
+    const foundLink = await Link.findOne({ _id: id });
+
+    if (!owner?.links?.includes(foundLink?._id)) {
+      throw new ApolloError('Unexpected error', 'CANT_UPDATE_DIFFERENT_USER')
+    }
+
+    const updatedLink = await Link.findOneAndUpdate({ _id: id }, { original });
+
+    return updatedLink;
+  },
 }
 
 export default linksMutations;

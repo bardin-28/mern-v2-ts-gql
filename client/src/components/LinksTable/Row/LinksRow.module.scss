@@ -11,6 +11,7 @@
 
 .heading {
   border-bottom: 1px solid var(--color-gray-200);
+  position: sticky;
 
   & > * {
     padding: 15px 10px;
@@ -19,13 +20,9 @@
 
 .link a {
   display: inline-block;
-  // stylelint-disable-next-line
   text-overflow: ellipsis;
-
-  /* Needed to make it work */
   overflow: hidden;
   white-space: nowrap;
-
   max-width: 200px;
 }
 
@@ -33,10 +30,32 @@
   max-width: 100px;
   display: flex;
   align-items: center;
-
   justify-content: flex-end;
 
   & > *:not(:last-of-type) {
     margin-right: 10px;
+  }
+
+  & > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  path {
+    fill: var(--color-blue-light);
+    transition: 0.5s;
+  }
+
+  svg {
+    cursor: pointer;
+    max-width: 20px;
+    max-height: 20px;
+
+    &:hover {
+      path {
+        fill: var(--color-blue-light400);
+      }
+    }
   }
 }
