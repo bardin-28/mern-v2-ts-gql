@@ -9,18 +9,6 @@ import {
 
 const PORT = process.env.PORT;
 
-const setHttpPlugin = {
-  async requestDidStart() {
-    return {
-      async willSendResponse({ response }: any) {
-        if (response?.errors) {
-          response.http.status = 400;
-        }
-      }
-    };
-  }
-};
-
 async function startApolloServer(app: any) {
   const server = new ApolloServer({
     introspection: true,
@@ -43,7 +31,7 @@ async function startApolloServer(app: any) {
       let token = req.headers.authorization.split(' ')[1] || '';
 
       let user = jwt.decode(token)
-      console.log(user, 'em')
+
       return {
         user
       }

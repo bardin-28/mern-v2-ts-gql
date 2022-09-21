@@ -2,7 +2,8 @@ import {gql} from "apollo-server-express";
 
 const linkTypeDefs = gql`
   extend type Query {
-    getAllLinks: [Link!]!
+    getAllLinks(limit: Int, offset: Int): [Link!]!
+    getUserLinks(limit: Int, offset: Int): [Link!]!
     getLink(id: String!): Link!
   }
 

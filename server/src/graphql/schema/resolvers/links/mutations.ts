@@ -2,14 +2,14 @@ import Link from '../../../../db/models/Link'
 import User from '../../../../db/models/User'
 import { ApolloError } from 'apollo-server-errors';
 
-// @ts-ignore
-import shortid from 'shortid'
+const shortid = require('shortid');
 
 const linksMutations = {
   createLink: async (_: any, { original }: any, context: any) => {
     // @ts-ignore
     const baseUrl = process.env.BASE_URL;
     let userEmail = context.user.email || '';
+
     const owner = await User.findOne({ userEmail })
 
     if (owner === null || owner.links === undefined ) {
@@ -19,7 +19,6 @@ const linksMutations = {
     const code = shortid.generate()
 
     const short = `${baseUrl}/t/${code}`
-
 
     const link = new Link({
       code, original, short, owner: owner?._id
@@ -42,12 +41,22 @@ const linksMutations = {
       throw new ApolloError('No such user', 'NO_SUCH_USER')
     }
 
-    const deletedLink = await Link.findOneAndDelete({ _id: id });
+    // If trying to delete not yours link
+    if (!owner.links?.includes(id)) {
+      throw new ApolloError('No such link', 'NO_SUCH_LINK')
+    }
 
+    const deletedLink = await Link.findOneAndDelete({ _id: id });
 
     if (deletedLink === null) {
       throw new ApolloError('No such link', 'NO_SUCH_LINK')
     }
+
+    const deletedLinkIndex =  owner.links.findIndex((link: any) => link?._id === deletedLink?._id);
+
+    owner.links.splice(deletedLinkIndex, 1);
+
+    await owner.save()
 
     return deletedLink
   },
@@ -55,13 +64,17 @@ const linksMutations = {
     let userEmail = context.user.email || '';
 
     const owner = await User.findOne({ userEmail })
-    const foundLink = await Link.findOne({ _id: id });
 
-    if (!owner?.links?.includes(foundLink?._id)) {
-      throw new ApolloError('Unexpected error', 'CANT_UPDATE_DIFFERENT_USER')
+    // If trying to update not yours link
+    if (!owner?.links?.includes(id)) {
+      throw new ApolloError('No such link', 'NO_SUCH_LINK')
     }
 
     const updatedLink = await Link.findOneAndUpdate({ _id: id }, { original });
+
+    if (updatedLink === null) {
+      throw new ApolloError('Unsuccessful updating link', 'NO_SUCH_LINK')
+    }
 
     return updatedLink;
   },

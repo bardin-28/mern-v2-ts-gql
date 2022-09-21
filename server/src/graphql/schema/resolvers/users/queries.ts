@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 const usersQueries = {
     getAllUsers: async () => await User.find(),
     getUser: async (_: any, { email }: any) => {
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email }).select("-links");
 
         if (!user) {
             throw new ApolloError('No such user', 'USER_NOT_FOUND')
@@ -26,8 +26,6 @@ const usersQueries = {
       if (!user) {
         throw new ApolloError('No such user', 'USER_NOT_FOUND')
       }
-
-      console.log(user, 'user')
 
       return user
     }

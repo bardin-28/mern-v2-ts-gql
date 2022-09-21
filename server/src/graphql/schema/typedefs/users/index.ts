@@ -2,7 +2,7 @@ import {gql} from "apollo-server-express";
 
 const userTypeDefs = gql`
    type Query {
-    getAllUsers: [User!]!
+    getAllUsers(limit: Int offset: Int): [User!]!
     getUser(email: String!): User!
     getCurrentUser: User!
    }
@@ -21,7 +21,6 @@ const userTypeDefs = gql`
     email: String!
     password: String!
     token: String!
-    links: [Link!]
   }
 
   input RegisterInput {
@@ -29,11 +28,6 @@ const userTypeDefs = gql`
     password: String!
     first_name: String!
     last_name: String!
-  }
-
-  input LoginInput {
-    email: String
-    password: String
   }
 `
 

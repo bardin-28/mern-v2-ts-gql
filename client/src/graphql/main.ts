@@ -1,7 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-export const apolloCache = new InMemoryCache({});
+export const apolloCache = new InMemoryCache({ addTypename: false });
 const mainAPI = process.env.REACT_APP_API;
 
 const httpLink = createHttpLink({

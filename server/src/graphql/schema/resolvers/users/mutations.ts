@@ -1,9 +1,8 @@
 import User from '../../../../db/models/User';
 import { ApolloError } from 'apollo-server-errors';
-// @ts-ignore
-import bcrypt from 'bcryptjs';
-// @ts-ignore
-import jwt from 'jsonwebtoken';
+
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const usersMutations = {
     createUser: async (_: any, { email, password, first_name, last_name }: any) => {
@@ -31,10 +30,10 @@ const usersMutations = {
                 user_id: newUser._id,
                 email
             },
-            // @ts-ignore
             process.env.JWT_SECRET,
             {
-                expiresIn: '24h'
+              // FIXME: need research about expires functional
+              expiresIn: '24h'
             }
         );
 
@@ -56,9 +55,9 @@ const usersMutations = {
                     user_id: user._id,
                     email
                 },
-                // @ts-ignore
                 process.env.JWT_SECRET,
                 {
+                    // FIXME: need research about expires functional
                     expiresIn: '24h'
                 }
             );
@@ -67,6 +66,7 @@ const usersMutations = {
             await user.save();
 
             return user;
+
         } else {
             // If user doesn't exist, return error
             throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD', {
@@ -74,13 +74,33 @@ const usersMutations = {
             })
         }
     },
-    updateUser: async (_: any, { email, password, first_name, last_name }: any) => {
-        const updatedUser = await User.findOneAndUpdate({ email }, { email, password, first_name, last_name });
-        return updatedUser;
+    updateUser: async (_: any, { email, password, first_name, last_name }: any, context: any) => {
+      let userEmail = context.user.email || '';
+
+      const owner = await User.findOne({ userEmail })
+
+      // If trying to update different account or no such user
+      if (owner === null || owner.links === undefined || owner.email !== email) {
+        throw new ApolloError('No such user', 'NO_SUCH_USER')
+      }
+
+      const updatedUser = await User.findOneAndUpdate({ email }, { email, password, first_name, last_name });
+
+      return updatedUser;
     },
-    deleteUser: async (_: any, { email }: any) => {
-        const deletedUser = await User.findOneAndDelete({ email });
-        return deletedUser
+    deleteUser: async (_: any, { email }: any, context: any) => {
+      let userEmail = context.user.email || '';
+
+      const owner = await User.findOne({ userEmail })
+
+      // If trying to delete different account or no such user
+      if (owner === null || owner.links === undefined || owner.email !== email) {
+        throw new ApolloError('No such user', 'NO_SUCH_USER')
+      }
+
+      const deletedUser = await User.findOneAndDelete({ email });
+
+      return deletedUser
     }
 }
 

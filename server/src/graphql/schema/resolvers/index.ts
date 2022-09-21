@@ -13,10 +13,10 @@ const resolvers = {
         ...linksMutations
     },
     User: {
-      links: async (parent: any) => {
-        const links = await Link.find({owner: parent._id})
-        return links
-      }
+      // links: async (parent: any) => {
+      //   const links = await Link.find({owner: parent._id})
+      //   return links
+      // }
     },
     Link: {
       owner: async (parent: any) => {
