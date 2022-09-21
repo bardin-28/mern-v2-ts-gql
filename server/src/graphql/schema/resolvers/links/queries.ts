@@ -1,13 +1,15 @@
 import Link from '../../../../db/models/Link';
 import User from "../../../../db/models/User";
-import {ApolloError} from "apollo-server-errors";
+import { ApolloError } from "apollo-server-errors";
 
 const linksQueries = {
   getAllLinks: async (_: any, { limit, offset }: any) => await Link.find().limit(limit).skip(offset),
   getUserLinks: async (_: any, { limit, offset }: any, context: any) => {
-    let userEmail = context.user.email || '';
+    let ownerEmail = context.user.email || '';
 
-    const owner = await User.findOne({ userEmail })
+    const owner = await User.findOne({ email: ownerEmail })
+
+    console.log(owner, 'own')
 
     if (owner === null || owner.links === undefined) {
       throw new ApolloError('No such user', 'NO_SUCH_USER')
@@ -22,9 +24,9 @@ const linksQueries = {
    return link
   },
   getLink: async (_: any, { id }: any, context: any) => {
-    let userEmail = context.user.email || '';
+    let ownerEmail = context.user.email || '';
 
-    const owner = await User.findOne({ userEmail })
+    const owner = await User.findOne({ email: ownerEmail })
 
     if (owner === null || owner.links === undefined) {
       throw new ApolloError('No such user', 'NO_SUCH_USER')

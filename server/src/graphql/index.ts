@@ -31,7 +31,7 @@ async function startApolloServer(app: any) {
       let token = req.headers.authorization.split(' ')[1] || '';
 
       let user = jwt.decode(token)
-
+      console.log(user, token, 'tok')
       return {
         user
       }

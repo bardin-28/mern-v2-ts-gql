@@ -8,9 +8,9 @@ const linksMutations = {
   createLink: async (_: any, { original }: any, context: any) => {
     // @ts-ignore
     const baseUrl = process.env.BASE_URL;
-    let userEmail = context.user.email || '';
+    let ownerEmail = context.user.email || '';
 
-    const owner = await User.findOne({ userEmail })
+    const owner = await User.findOne({ email: ownerEmail })
 
     if (owner === null || owner.links === undefined ) {
       throw new ApolloError('No such user', 'NO_SUCH_USER')
@@ -33,9 +33,9 @@ const linksMutations = {
     return link
   },
   deleteLink: async (_: any, { id }: any, context: any) => {
-    let userEmail = context.user.email || '';
+    let ownerEmail = context.user.email || '';
 
-    const owner = await User.findOne({ userEmail })
+    const owner = await User.findOne({ email: ownerEmail })
 
     if (owner === null || owner.links === undefined) {
       throw new ApolloError('No such user', 'NO_SUCH_USER')
@@ -61,9 +61,9 @@ const linksMutations = {
     return deletedLink
   },
   updateLink: async (_: any, { id, original }: any, context:any) => {
-    let userEmail = context.user.email || '';
+    let ownerEmail = context.user.email || '';
 
-    const owner = await User.findOne({ userEmail })
+    const owner = await User.findOne({ email: ownerEmail })
 
     // If trying to update not yours link
     if (!owner?.links?.includes(id)) {

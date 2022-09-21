@@ -1,7 +1,17 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { offsetLimitPagination } from '@apollo/client/utilities';
 
-export const apolloCache = new InMemoryCache({ addTypename: false });
+export const apolloCache = new InMemoryCache({
+  addTypename: false,
+  typePolicies: {
+    Query: {
+      fields: {
+        links: offsetLimitPagination(),
+      },
+    },
+  },
+});
 const mainAPI = process.env.REACT_APP_API;
 
 const httpLink = createHttpLink({
@@ -26,18 +36,7 @@ export const apiClient = new ApolloClient({
   connectToDevTools: true,
   defaultOptions: {
     watchQuery: {
-      nextFetchPolicy(currentFetchPolicy) {
-        if (
-          currentFetchPolicy === 'cache-first' ||
-          currentFetchPolicy === 'cache-and-network'
-        ) {
-          // Demote the network policies (except "no-cache") to "cache-first"
-          // after the first request.
-          return 'network-only';
-        }
-        // Leave all other fetch policies unchanged.
-        return currentFetchPolicy;
-      },
+      fetchPolicy: 'network-only',
     },
   },
 });

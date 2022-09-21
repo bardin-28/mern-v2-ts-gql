@@ -1,11 +1,9 @@
-query GET_USER_LINKS {
-  getCurrentUser {
-    links {
-      id
-      original
-      short
-      code
-      clicks
-    }
+query GET_USER_LINKS($limit: Int $offset: Int) {
+  getUserLinks(limit: $limit offset: $offset) {
+    id
+    original
+    short
+    code
+    clicks
   }
 }

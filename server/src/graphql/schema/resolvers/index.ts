@@ -1,6 +1,5 @@
 import { userQueries, usersMutations } from "./users";
 import { linksMutations, linksQueries } from "./links";
-import Link from "../../../db/models/Link";
 import User from "../../../db/models/User";
 
 const resolvers = {

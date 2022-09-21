@@ -75,9 +75,9 @@ const usersMutations = {
         }
     },
     updateUser: async (_: any, { email, password, first_name, last_name }: any, context: any) => {
-      let userEmail = context.user.email || '';
+      let ownerEmail = context.user.email || '';
 
-      const owner = await User.findOne({ userEmail })
+      const owner = await User.findOne({ email: ownerEmail })
 
       // If trying to update different account or no such user
       if (owner === null || owner.links === undefined || owner.email !== email) {
@@ -89,9 +89,9 @@ const usersMutations = {
       return updatedUser;
     },
     deleteUser: async (_: any, { email }: any, context: any) => {
-      let userEmail = context.user.email || '';
+      let ownerEmail = context.user.email || '';
 
-      const owner = await User.findOne({ userEmail })
+      const owner = await User.findOne({ email: ownerEmail })
 
       // If trying to delete different account or no such user
       if (owner === null || owner.links === undefined || owner.email !== email) {

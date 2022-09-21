@@ -2,20 +2,16 @@
   padding: 15px 20px;
   background: var(--color-white);
   border-radius: 6px;
-
-  max-height: 87vh;
-
   overflow: hidden;
+  flex: 1;
 }
 
 .wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  max-height: 87vh;
-
   overflow-y: scroll;
+  max-height: 79.9vh;
 }
 
 .clear {
